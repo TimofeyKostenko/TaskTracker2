@@ -33,9 +33,9 @@ namespace Domain.Entities
         public DateTime? CompletionDate { get; set; }
 
         [Column("Status")]
-        public ProjectStatus Status { get; set; }
+        public ProjectStatus? Status { get; set; }
         [Column("Priority")]
-        public int Priority { get; set; }
+        public int? Priority { get; set; }
 
     }
 }

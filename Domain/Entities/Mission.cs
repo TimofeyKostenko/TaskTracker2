@@ -24,15 +24,15 @@ namespace Domain.Entities
         public string? Description { get; set; }
 
         [Column("Status")]
-        public MissionStatus Status { get; set; }
+        public MissionStatus? Status { get; set; }
 
         [Column("Priority")]
-        public int Priority { get; set; }
+        public int? Priority { get; set; }
 
         [Display(Name = "Priject ID")]
         [Required(ErrorMessage = "Enter a project ID")]
         [Column("ProjectId")]
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
     }
 
 }
