@@ -22,6 +22,7 @@ namespace Domain.Entities
         [Display(Name = "Project name")]
         [Required(ErrorMessage = "Enter a project name")]
         [Column("ProjectName")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Invalid length of the name (3 to 50 characters)")]
         public string? ProjectName { get; set; }
 
         [Display(Name = "Start Date")]
@@ -35,6 +36,7 @@ namespace Domain.Entities
         [Column("Status")]
         public ProjectStatus? Status { get; set; }
         [Column("Priority")]
+        [Range(1, 10, ErrorMessage = "Range from 1 to 10 ")]
         public int? Priority { get; set; }
 
     }
