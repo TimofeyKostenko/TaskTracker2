@@ -1,9 +1,5 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Business.Interfaces
 {
@@ -19,5 +15,6 @@ namespace Business.Interfaces
         Task<bool> DeleteProject(int id);
 
         Task<Project> EditProject(int id, Project project);
+        IQueryable<Mission> GetTasksByProject(int id);
     }
 }

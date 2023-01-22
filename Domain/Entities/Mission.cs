@@ -1,7 +1,7 @@
 ﻿using Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
@@ -35,7 +35,10 @@ namespace Domain.Entities
         [Display(Name = "Priject ID")]
         [Required(ErrorMessage = "Enter a project ID")]
         [Column("ProjectId")]
+    
         public int? ProjectId { get; set; }
+        
+        public Project Project { get; set; }
     }
 
 }

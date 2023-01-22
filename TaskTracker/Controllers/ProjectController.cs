@@ -2,6 +2,7 @@
 using Business.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -75,6 +76,18 @@ namespace TaskTracker.Controllers
             }
             projectService.DeleteProject(id);
             return StatusCode(StatusCodes.Status201Created);
+        }
+        [HttpGet("{projectId}/Missions")]
+        public IActionResult GetallMissionsByProject(int projectId)
+        {
+            var project = projectService.GetProject(projectId);
+            if (project == null)
+            {
+                return BadRequest();
+            }
+            var missions = projectService.GetTasksByProject(projectId);
+            return Ok(missions);
+
         }
     }
 }

@@ -66,5 +66,10 @@ namespace Business
 
             return projectRepo.Get(id);
         }
+
+        public IQueryable<Mission> GetTasksByProject(int id)
+        {
+            return projectRepo.GetTasks(id);
+        }
     }
 }

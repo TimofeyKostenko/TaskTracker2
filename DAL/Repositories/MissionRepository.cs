@@ -41,6 +41,11 @@ namespace DAL.Repositories
             return db.Missions;
         }
 
+        public IQueryable<Mission> GetTasks(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Mission> Update(Mission entity)
         {
             db.Missions.Update(entity);

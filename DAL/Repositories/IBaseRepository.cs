@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Domain.Entities;
 
 namespace DAL.Repositories
 {
@@ -18,5 +16,7 @@ namespace DAL.Repositories
         T? Get(int id);
 
         Task<T> Update(T entity);
+
+        IQueryable<Mission> GetTasks(int id);
     }
 }

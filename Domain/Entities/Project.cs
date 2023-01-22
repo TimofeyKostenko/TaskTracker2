@@ -20,6 +20,7 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [Display(Name = "Project name")]
+       
         [Required(ErrorMessage = "Enter a project name")]
         [Column("ProjectName")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Invalid length of the name (3 to 50 characters)")]
@@ -38,6 +39,9 @@ namespace Domain.Entities
         [Column("Priority")]
         [Range(1, 10, ErrorMessage = "Range from 1 to 10 ")]
         public int? Priority { get; set; }
-
+        
+        public ICollection<Mission> Missions { get; set; }
     }
+
 }
+

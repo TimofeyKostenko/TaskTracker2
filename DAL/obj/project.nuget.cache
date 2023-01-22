@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Jt9a2fjH6rMWcLFI/LDFI8hmz/4F55eXUkbV/GSL6yAZzAMb+58xBf7XIinSVOb4eljtyIbjXYxN0cLS/mw7sw==",
+  "dgSpecHash": "ozZgE/xIVtt/S3FFHCPZfCz/GHkQgf5JuZq3Bi1DSmkyl0OWH1qUFKceoHfCpWbFk7et1/JXL5MOnWczkdPKiA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
