@@ -11,10 +11,10 @@ namespace DAL
         }
         public DbSet<Mission> Missions { get; set; }
         public DbSet<Project> Projects { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Configure default schema
-            //modelBuilder.HasDefaultSchema("Admin");
+            
             
             //Map entity to table
             modelBuilder.Entity<Mission>().ToTable("Missions", "dbo");
