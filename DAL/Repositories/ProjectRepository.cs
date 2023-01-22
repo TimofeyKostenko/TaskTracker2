@@ -1,9 +1,4 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
@@ -45,6 +40,19 @@ namespace DAL.Repositories
             db.Projects.Update(entity);
             await db.SaveChangesAsync();
             return entity;
+        }
+
+        public IQueryable<Mission> GetTasks(int projectId)
+        {
+            var missions = db.Missions.Where(m => m.ProjectId == projectId).OrderBy(m => m.Priority).Select(m => new Mission
+            {
+                MissionName = m.MissionName,
+                Description = m.Description,
+                Status = m.Status,
+                Priority = m.Priority,
+                ProjectId = m.ProjectId
+            });
+            return missions;
         }
     }
 }

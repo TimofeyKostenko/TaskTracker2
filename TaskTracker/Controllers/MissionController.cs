@@ -1,4 +1,4 @@
-﻿using Business;
+﻿
 using Business.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +19,19 @@ namespace TaskTracker.Controllers
             this.missionService = missionService;
         }
 
-
+        //get Task by Id
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var mission = missionService.GetMission(id);
             if (mission == null)
             {
-                return NotFound();
+                return NotFound("There is no task with this ID");
             }
             return Ok(mission);
         }
 
+        //get all tasks
         [HttpGet]
         public IActionResult Get()
         {
@@ -38,30 +39,30 @@ namespace TaskTracker.Controllers
             return Ok(missions);
         }
 
-
+        // create new task
         [HttpPost]
         public IActionResult Post([FromBody] Mission mission)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Incorrect data");
             }
             var newMission = missionService.CreateMission(mission);
             return StatusCode(StatusCodes.Status201Created);
 
         }
 
-
+        //update task data 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Mission mission)
         {
             if (mission == null)
             {
-                return BadRequest();
+                return BadRequest("There is no task with this ID");
             }
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Incorrect data");
             }
             missionService.EditMission(id, mission);
             return NoContent();
@@ -74,11 +75,11 @@ namespace TaskTracker.Controllers
             var mission = missionService.GetMission(id);
             if (mission == null)
             {
-                return BadRequest();
+                return BadRequest("There is no task with this ID");
             }
             missionService.DeleteMission(id);
             var newMissions = missionService.GetAll();
-            return StatusCode(StatusCodes.Status201Created);
+            return NoContent();
         }
     }
 }

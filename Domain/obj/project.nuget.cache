@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YFrd6JO/pbyekBEP6xI1qJA6vRnDlKlIfWapyK0JLm6cSpJLJ8wDeIu844bofKaJtoHJFa2FurFhXC+AradF+w==",
+  "dgSpecHash": "l5f29eQwTtaiWVzgy7gRJobldnlcVY8DzCMbEeyLK3/IpQWarDMl8+cVyxWNzOszSjYElpIK9TdX5+gciEmdTg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

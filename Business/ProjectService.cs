@@ -28,12 +28,14 @@ namespace Business
             return newProject;
         }
 
+
         public async Task<bool> DeleteProject(int id)
         {
             var project = projectRepo.Get(id);
             await projectRepo.Delete(project);
             return true;
         }
+
 
         public async Task<Project> EditProject(int id, Project project)
         {
@@ -53,18 +55,15 @@ namespace Business
             return changedProject;
         }
 
-        public IQueryable<Project>? GetAll()
-        {
 
-            return projectRepo.GetAll();
-
-        }
-
-        public Project? GetProject(int id)
-        {
+        public IQueryable<Project>? GetAll() => projectRepo.GetAll();
+        
 
 
-            return projectRepo.Get(id);
-        }
+        public Project? GetProject(int id) => projectRepo.Get(id);
+
+
+        public IQueryable<Mission> GetTasksByProject(int id) => projectRepo.GetTasks(id);
+        
     }
 }

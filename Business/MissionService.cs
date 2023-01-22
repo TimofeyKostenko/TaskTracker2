@@ -12,6 +12,7 @@ namespace Business
         {
             this.missionRepo = missionRepo;
         }
+
         public Mission CreateMission(Mission mission)
         {
             var newMission = new Mission()
@@ -26,12 +27,14 @@ namespace Business
             return newMission;
         }
 
+
         public async Task<bool> DeleteMission(int id)
         {
             var mission = missionRepo.Get(id);
             await missionRepo.Delete(mission);
             return true;
         }
+
 
         public async Task<Mission> EditMission(int id, Mission mission)
         {
@@ -51,22 +54,15 @@ namespace Business
             return changedMission;
         }
 
-        public IQueryable<Mission>? GetAll()
-        {
 
-            return missionRepo.GetAll();
-        }
+        public IQueryable<Mission>? GetAll() => missionRepo.GetAll();
 
-        public Mission? GetMission(int id)
-        {
 
-            return missionRepo.Get(id);
+        public Mission? GetMission(int id) => missionRepo.Get(id);
 
-        }
 
         public IQueryable<Mission>? GetMissionsProject(int projectId)
         {
-
             return missionRepo.GetAll().Where(x => x.ProjectId == projectId); ;
         }
     }

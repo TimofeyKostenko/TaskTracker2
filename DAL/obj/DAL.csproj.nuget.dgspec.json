@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\DAL.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\DAL.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\DAL.csproj",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\DAL\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj"
+              "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj"
               }
             }
           }
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\TaskTracker2\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\TaskTracker2\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
