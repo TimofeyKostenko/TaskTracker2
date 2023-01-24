@@ -1,5 +1,6 @@
 
-*.dockerignore
+.dockerignore
+.gitignore
 
 /.vs/
 /bin/
