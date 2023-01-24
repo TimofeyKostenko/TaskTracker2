@@ -3,8 +3,8 @@ appsettings.Development.json
 TaskTracker.csproj.user
 
 *.csproj
+*.csproj.user
 
-.gitignore
 
-.vs/
+.vs
 /bin/
