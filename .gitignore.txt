@@ -1,6 +1,10 @@
+appsettings.Development.json
 
-.dockerignore
+TaskTracker.csproj.user
+
+*.csproj
+
 .gitignore
 
-/.vs/
+.vs/
 /bin/
