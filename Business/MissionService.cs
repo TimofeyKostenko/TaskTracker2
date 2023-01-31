@@ -6,14 +6,13 @@ namespace Business
 {
     public class MissionService  : IMissionService
     {
-        private readonly IBaseRepository<Mission> missionRepo;
+        private readonly IMissionRepository missionRepo;
 
-        public MissionService(IBaseRepository<Mission> missionRepo)
+        public MissionService(IMissionRepository missionRepo)
         {
             this.missionRepo = missionRepo;
         }
-
-        public Mission CreateMission(Mission mission)
+        public async Task<Mission> CreateMissionAsync(Mission mission)
         {
             var newMission = new Mission()
             {
@@ -23,25 +22,21 @@ namespace Business
                 Status = mission.Status,
                 Priority = mission.Priority
             };
-            missionRepo.Create(newMission);
+            await missionRepo.CreateAsync(newMission);
             return newMission;
         }
-
-
-        public async Task<bool> DeleteMission(int id)
+        public async Task<bool> DeleteMissionAsync(int missionId)
         {
-            var mission = missionRepo.Get(id);
-            await missionRepo.Delete(mission);
+            var mission = await missionRepo.GetAsync(missionId);
+            await missionRepo.DeleteAsync(mission);
             return true;
         }
-
-
-        public async Task<Mission> EditMission(int id, Mission mission)
+        public async Task<Mission> EditMissionAsync(int missionId, Mission mission)
         {
-            var changedMission = missionRepo.Get(id);
+            var changedMission = await missionRepo.GetAsync(missionId);
             if (changedMission == null)
             {
-                throw new ValidationException("This object does not exist", "");
+                throw new ValidationExceptionA("This object does not exist", "");
             };
 
             changedMission.MissionName = mission.MissionName;
@@ -50,20 +45,13 @@ namespace Business
             changedMission.Status = mission.Status;
             changedMission.Priority = mission.Priority;
 
-            await missionRepo.Update(changedMission);
+            await missionRepo.UpdateAsync(changedMission);
             return changedMission;
         }
-
-
-        public IQueryable<Mission>? GetAll() => missionRepo.GetAll();
-
-
-        public Mission? GetMission(int id) => missionRepo.Get(id);
-
-
-        public IQueryable<Mission>? GetMissionsProject(int projectId)
+        public async Task<IEnumerable<Mission>?> GetAllAsync()
         {
-            return missionRepo.GetAll().Where(x => x.ProjectId == projectId); ;
+            return await missionRepo.GetAllAsync();
         }
+        public async Task<Mission?> GetMissionAsync(int missionId) => await missionRepo.GetAsync(missionId);
     }
 }

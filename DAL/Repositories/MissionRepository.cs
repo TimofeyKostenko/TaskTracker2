@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
-    public class MissionRepository : IBaseRepository<Mission>
+    public class MissionRepository : IMissionRepository
     {
         private readonly ApplicationDbContext db;
 
@@ -10,42 +11,31 @@ namespace DAL.Repositories
         {
             this.db = db;
         }
-
-        public async Task<bool> Create(Mission entity)
+        public async Task<bool> CreateAsync(Mission mission)
         {
-            await db.Missions.AddAsync(entity);
-            await db.SaveChangesAsync();
-            return true;
-
-        }
-
-        public async Task<bool> Delete(Mission entity)
-        {
-            db.Missions.Remove(entity);
+            await db.Missions.AddAsync(mission);
             await db.SaveChangesAsync();
             return true;
         }
-
-        public Mission? Get(int id)
+        public async Task<bool> DeleteAsync(Mission mission)
         {
-            return db.Missions.FirstOrDefault(x => x.Id == id);
-        }
-
-        public IQueryable<Mission>? GetAll()
-        {
-            return db.Missions;
-        }
-
-        public IQueryable<Mission> GetTasks(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Mission> Update(Mission entity)
-        {
-            db.Missions.Update(entity);
+            db.Missions.Remove(mission);
             await db.SaveChangesAsync();
-            return entity;
+            return true;
+        }
+        public async Task<Mission?> GetAsync(int missionId)
+        {
+            return await db.Missions.SingleOrDefaultAsync(x => x.Id == missionId);
+        }
+        public async Task<IEnumerable<Mission>?> GetAllAsync()
+        {
+            return await db.Missions.ToListAsync();
+        }
+        public async Task<Mission?> UpdateAsync(Mission mission)
+        {
+            db.Missions.Update(mission);
+            await db.SaveChangesAsync();
+            return mission;
         }
     }
 }

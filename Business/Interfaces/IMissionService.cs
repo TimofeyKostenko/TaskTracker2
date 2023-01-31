@@ -9,17 +9,10 @@ namespace Business.Interfaces
 {
     public interface IMissionService
     {
-        IQueryable<Mission>? GetAll();
-
-        Mission GetMission(int id);
-
-
-        Mission CreateMission(Mission mission);
-
-        Task<bool> DeleteMission(int id);
-
-        Task<Mission> EditMission(int id, Mission mission);
-
-        IQueryable<Mission> GetMissionsProject(int projectId);
+        Task<IEnumerable<Mission>?> GetAllAsync();
+        Task<Mission?> GetMissionAsync(int missionId);
+        Task<Mission> CreateMissionAsync(Mission mission);
+        Task<bool> DeleteMissionAsync(int missionId);
+        Task<Mission> EditMissionAsync(int missionId, Mission mission);
     }
 }

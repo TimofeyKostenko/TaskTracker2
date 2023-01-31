@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IBaseRepository<Mission>, MissionRepository>();
-builder.Services.AddScoped<IBaseRepository<Project>, ProjectRepository>();
+builder.Services.AddScoped<IMissionRepository, MissionRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();

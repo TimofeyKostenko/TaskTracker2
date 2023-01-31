@@ -10,20 +10,20 @@ namespace TaskTracker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : ControllerBase
+    public class ProjectsController : ControllerBase
     {
         private readonly IProjectService projectService;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectsController(IProjectService projectService)
         {
             this.projectService = projectService;
         }
 
         //get project by id
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{projectId}")]
+        public async Task<IActionResult> GetAsync(int projectId)
         {
-            var project = projectService.GetProject(id);
+            var project = await projectService.GetProjectAsync(projectId);
             if (project == null)
             {
                 return BadRequest("There is no project with this ID");
@@ -33,65 +33,56 @@ namespace TaskTracker.Controllers
 
         //get all the projects
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
-            var projects = projectService.GetAll();
+            var projects = await projectService.GetAllAsync();
             return Ok(projects);
         }
        //Create new project
         [HttpPost]
-        public IActionResult Post([FromBody] Project project)
+        public async Task<IActionResult> PostAsync([FromBody] Project project)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Incorrect data");
-            }
-            var newProject = projectService.CreateProject(project);
-            return StatusCode(StatusCodes.Status201Created);
-
+            var newProject = await projectService.CreateProjectAsync(project);
+            var routeValues = new { id = newProject.Id};
+            return CreatedAtRoute(routeValues, newProject);
         }
 
         // update project data
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Project project)
+        public async Task<IActionResult> PutAsync(int projectId, [FromBody] Project project)
         {
-            var currentProject = projectService.GetProject(id);
+            var currentProject = await projectService.GetProjectAsync(projectId);
             if (currentProject == null)
             {
                 return BadRequest("There is no project with this ID");
             }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Incorrect data");
-            }
-            var newProject = projectService.EditProject(id, project);
+            var newProject = await projectService.EditProjectAsync(projectId, project);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{projectId}")]
+        public async Task<IActionResult> DeleteAsync(int projectId)
         {
-            var mission = projectService.GetProject(id);
+            var mission = await projectService.GetProjectAsync(projectId);
             if (mission == null)
             {
                 return BadRequest("There is no project with this ID");
             }
-            projectService.DeleteProject(id);
-            return StatusCode(StatusCodes.Status201Created);
+            await projectService.DeleteProjectAsync(projectId);
+            return NoContent();
         }
 
         //get all tasks of one project by projectId
         [HttpGet("{projectId}/Missions")]
-        public IActionResult GetallMissionsByProject(int projectId)
+        public async Task<IActionResult> GetAllMissionsByProjectAsync(int projectId)
         {
-            var project = projectService.GetProject(projectId);
+            var project = await projectService.GetProjectAsync(projectId);
             if (project == null)
             {
                 return BadRequest("There is no project with this ID");
             }
-            var missions = projectService.GetTasksByProject(projectId);
+            var missions = await projectService.GetTasksByProjectAsync(projectId);
             return Ok(missions);
-
         }
     }
 }
