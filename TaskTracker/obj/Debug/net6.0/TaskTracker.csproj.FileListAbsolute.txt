@@ -174,3 +174,9 @@ C:\Users\Admin\Source\Repos\TaskTracker2\TaskTracker\obj\Debug\net6.0\refint\Tas
 C:\Users\Admin\Source\Repos\TaskTracker2\TaskTracker\obj\Debug\net6.0\TaskTracker.pdb
 C:\Users\Admin\Source\Repos\TaskTracker2\TaskTracker\obj\Debug\net6.0\TaskTracker.genruntimeconfig.cache
 C:\Users\Admin\Source\Repos\TaskTracker2\TaskTracker\obj\Debug\net6.0\ref\TaskTracker.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\TaskTracker2\TaskTracker\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

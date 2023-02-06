@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Domain.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +14,10 @@ namespace Business.DTO
 
         public string? Description { get; set; }
 
-        public TaskStatus Status { get; set; }
+        public MissionStatus? Status { get; set; }
 
-        public int Priority { get; set; }
+        public int? Priority { get; set; }
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
     }
 }

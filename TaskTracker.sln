@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTracker", "TaskTracker\TaskTracker.csproj", "{DF3B7C33-70E0-4613-AB85-AB403A910C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskTracker", "TaskTracker\TaskTracker.csproj", "{DF3B7C33-70E0-4613-AB85-AB403A910C70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9EF7FBDE-4D95-4805-BFE5-CDAB6225781B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F3CD67C4-B60C-4BAA-8646-9875493E1E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{F3CD67C4-B60C-4BAA-8646-9875493E1E79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{5527A912-9C81-40D2-877D-17C4D9983CFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{7FC1DD8D-CD69-491E-AA48-CCF15FC4275A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{7FC1DD8D-CD69-491E-AA48-CCF15FC4275A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{A7D0D13F-EA6B-4C18-A057-4D86EFEB8C9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F1CF283C-E3BE-4150-8F85-0DE88C2DA384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{F1CF283C-E3BE-4150-8F85-0DE88C2DA384}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers.Test", "Controllers.Test\Controllers.Test.csproj", "{F8BDA812-6252-4E7E-BFA7-DD40AD7A4369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F1CF283C-E3BE-4150-8F85-0DE88C2DA384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1CF283C-E3BE-4150-8F85-0DE88C2DA384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1CF283C-E3BE-4150-8F85-0DE88C2DA384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BDA812-6252-4E7E-BFA7-DD40AD7A4369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BDA812-6252-4E7E-BFA7-DD40AD7A4369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BDA812-6252-4E7E-BFA7-DD40AD7A4369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BDA812-6252-4E7E-BFA7-DD40AD7A4369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

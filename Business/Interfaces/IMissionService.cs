@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Business.DTO;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace Business.Interfaces
     {
         Task<IEnumerable<Mission>?> GetAllAsync();
         Task<Mission?> GetMissionAsync(int missionId);
-        Task<Mission> CreateMissionAsync(Mission mission);
+        Task<MissionDTO> CreateMissionAsync(MissionDTO mission);
         Task<bool> DeleteMissionAsync(int missionId);
-        Task<Mission> EditMissionAsync(int missionId, Mission mission);
+        Task<MissionDTO> EditMissionAsync(int missionId, MissionDTO mission);
     }
 }

@@ -1,13 +1,14 @@
-﻿
+﻿using Business.DTO;
 using Business.Interfaces;
-using Domain.Entities;
+using Business.NotImplExceptionFilterAttribute;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TaskTracker.Controllers
 {
+    [NotImplExceptionFilter]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectsController : ControllerBase
@@ -40,23 +41,23 @@ namespace TaskTracker.Controllers
         }
        //Create new project
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Project project)
+        public async Task<IActionResult> PostAsync([FromBody] ProjectDTO project)
         {
             var newProject = await projectService.CreateProjectAsync(project);
-            var routeValues = new { id = newProject.Id};
+            var routeValues = new { ProjectName = newProject.ProjectName};
             return CreatedAtRoute(routeValues, newProject);
         }
 
         // update project data
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int projectId, [FromBody] Project project)
+        public async Task<IActionResult> PutAsync(int projectId, [FromBody] ProjectDTO project)
         {
             var currentProject = await projectService.GetProjectAsync(projectId);
             if (currentProject == null)
             {
                 return BadRequest("There is no project with this ID");
             }
-            var newProject = await projectService.EditProjectAsync(projectId, project);
+            await projectService.EditProjectAsync(projectId, project);
             return NoContent();
         }
 

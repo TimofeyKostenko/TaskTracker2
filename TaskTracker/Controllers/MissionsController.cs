@@ -1,13 +1,14 @@
 ﻿
+using Business.DTO;
 using Business.Interfaces;
-using Domain.Entities;
+using Business.NotImplExceptionFilterAttribute;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TaskTracker.Controllers
 {
-
+    [NotImplExceptionFilter]
     [Route("api/[controller]")]
     [ApiController]
     public class MissionsController : ControllerBase
@@ -23,10 +24,6 @@ namespace TaskTracker.Controllers
         public async Task<IActionResult> GetAsync(int missionId)
         {
             var mission = await missionService.GetMissionAsync(missionId);
-            if (mission == null)
-            {
-                return NotFound("There is no task with this ID");
-            }
             return Ok(mission);
         }
         //get all tasks
@@ -38,15 +35,15 @@ namespace TaskTracker.Controllers
         }
         // create new task
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] Mission mission)
+        public async Task<IActionResult> PostAsync([FromBody] MissionDTO mission)
         {
             var newMission = await missionService.CreateMissionAsync(mission);
-            var routeValues = new { id = newMission.Id };
+            var routeValues = new { name = newMission.MissionName };
             return CreatedAtRoute(routeValues, newMission);
         }
         //update task data 
         [HttpPut("{missionId}")]
-        public async Task<IActionResult> PutAsync(int missionId, [FromBody] Mission mission)
+        public async Task<IActionResult> PutAsync(int missionId, [FromBody] MissionDTO mission)
         {
             await missionService.EditMissionAsync(missionId, mission);
             
@@ -62,7 +59,6 @@ namespace TaskTracker.Controllers
                 return BadRequest("There is no task with this ID");
             }
             await missionService.DeleteMissionAsync(missionId);
-            var newMissions = await missionService.GetAllAsync();
             return NoContent();
         }
     }

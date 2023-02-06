@@ -4,6 +4,8 @@ using DAL;
 using DAL.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using TaskTracker.Controllers;
+using Business.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +21,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(connection, b => b.MigrationsAssembly("TaskTracker")));
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly, (typeof(ProjectService).Assembly), (typeof(MissionService).Assembly));
 
 var app = builder.Build();
 

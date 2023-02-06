@@ -1,4 +1,6 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.DTO;
+using Business.Interfaces;
 using DAL.Repositories;
 using Domain.Entities;
 
@@ -7,12 +9,14 @@ namespace Business
     public class MissionService  : IMissionService
     {
         private readonly IMissionRepository missionRepo;
+        private readonly IMapper mapper;
 
-        public MissionService(IMissionRepository missionRepo)
+        public MissionService(IMapper mapper, IMissionRepository missionRepo)
         {
             this.missionRepo = missionRepo;
+            this.mapper = mapper;
         }
-        public async Task<Mission> CreateMissionAsync(Mission mission)
+        public async Task<MissionDTO> CreateMissionAsync(MissionDTO mission)
         {
             var newMission = new Mission()
             {
@@ -23,7 +27,7 @@ namespace Business
                 Priority = mission.Priority
             };
             await missionRepo.CreateAsync(newMission);
-            return newMission;
+            return mapper.Map<MissionDTO>(mission); 
         }
         public async Task<bool> DeleteMissionAsync(int missionId)
         {
@@ -31,14 +35,13 @@ namespace Business
             await missionRepo.DeleteAsync(mission);
             return true;
         }
-        public async Task<Mission> EditMissionAsync(int missionId, Mission mission)
+        public async Task<MissionDTO> EditMissionAsync(int missionId, MissionDTO mission)
         {
             var changedMission = await missionRepo.GetAsync(missionId);
-            if (changedMission == null)
+            if  (changedMission == null)
             {
-                throw new ValidationExceptionA("This object does not exist", "");
-            };
 
+            }
             changedMission.MissionName = mission.MissionName;
             changedMission.ProjectId = mission.ProjectId;
             changedMission.Description = mission.Description;
@@ -46,12 +49,16 @@ namespace Business
             changedMission.Priority = mission.Priority;
 
             await missionRepo.UpdateAsync(changedMission);
-            return changedMission;
+            return mapper.Map<MissionDTO>(mission);
         }
         public async Task<IEnumerable<Mission>?> GetAllAsync()
         {
             return await missionRepo.GetAllAsync();
         }
-        public async Task<Mission?> GetMissionAsync(int missionId) => await missionRepo.GetAsync(missionId);
+        public async Task<Mission?> GetMissionAsync(int missionId)
+        {
+            return await missionRepo.GetAsync(missionId);
+
+        }
     }
 }

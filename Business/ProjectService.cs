@@ -1,20 +1,25 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.DTO;
+using Business.Interfaces;
 using DAL.Repositories;
 using Domain.Entities;
 
 
 namespace Business
 {
+
     public class ProjectService : IProjectService
     {
         //adding reposiroties for Projects
         private readonly IProjectRepository projectRepo;
+        private readonly IMapper mapper;
 
-        public ProjectService(IProjectRepository projectRepo)
+        public ProjectService(IProjectRepository projectRepo, IMapper mapper)
         {
             this.projectRepo = projectRepo;
+            this.mapper = mapper;
         }
-        public async Task<Project> CreateProjectAsync(Project project)
+        public async Task<ProjectDTO> CreateProjectAsync(ProjectDTO project)
         {
             var newProject = new Project()
             { 
@@ -25,22 +30,18 @@ namespace Business
                 Priority = project.Priority
             };
             await projectRepo.CreateAsync(newProject);
-            return newProject;
+            return mapper.Map<ProjectDTO>(newProject);
         }
         public async Task<bool> DeleteProjectAsync(int projectId)
         {
             var project = await projectRepo.GetAsync(projectId);
+            
             await projectRepo.DeleteAsync(project);
             return true;
         }
-        public async Task<Project> EditProjectAsync(int projectId, Project project)
+        public async Task<ProjectDTO> EditProjectAsync(int projectId, ProjectDTO project)
         {
             var changedProject = await projectRepo.GetAsync(projectId);
-            if (changedProject == null)
-            {
-                throw new ValidationExceptionA("There is no object with this id", "");
-            };
-
             changedProject.ProjectName = project.ProjectName;
             changedProject.StartDate = project.StartDate;
             changedProject.CompletionDate = project.CompletionDate;
@@ -48,10 +49,24 @@ namespace Business
             changedProject.Priority = project.Priority;
 
             await projectRepo.UpdateAsync(changedProject);
-            return changedProject;
+            return mapper.Map<ProjectDTO>(changedProject);
         }
-        public async Task<IEnumerable<Project>?> GetAllAsync() => await projectRepo.GetAllAsync();
-        public async Task<Project?> GetProjectAsync(int projectId) => await projectRepo.GetAsync(projectId);
-        public async Task<IEnumerable<Mission>?> GetTasksByProjectAsync(int projectId) => await projectRepo.GetTasksAsync(projectId);
+        public async Task<IEnumerable<ProjectDTO>?> GetAllAsync()
+        {
+            var allProjects =await projectRepo.GetAllAsync();
+            return allProjects.Select(project => mapper.Map<ProjectDTO>(project));
+        }
+
+        public async Task<ProjectDTO?> GetProjectAsync(int projectId)
+        {
+            var project = await projectRepo.GetAsync(projectId);
+            return mapper.Map<ProjectDTO>(project);
+        }
+
+        public async Task<IEnumerable<MissionDTO>?> GetTasksByProjectAsync(int projectId)
+        {
+            var projectMissions =  await projectRepo.GetTasksAsync(projectId);
+            return projectMissions.Select(mission => mapper.Map<MissionDTO>(mission));
+        }
     }
 }

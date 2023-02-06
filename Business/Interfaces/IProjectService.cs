@@ -1,15 +1,16 @@
-﻿using Domain.Entities;
+﻿using Business.DTO;
+using Domain.Entities;
 
 
 namespace Business.Interfaces
 {
     public interface IProjectService
     {
-        Task<IEnumerable<Project>?> GetAllAsync();
-        Task<Project?> GetProjectAsync(int projectId);
-        Task<Project> CreateProjectAsync(Project project);
+        Task<IEnumerable<ProjectDTO>?> GetAllAsync();
+        Task<ProjectDTO?> GetProjectAsync(int projectId);
+        Task<ProjectDTO> CreateProjectAsync(ProjectDTO project);
         Task<bool> DeleteProjectAsync(int projectId);
-        Task<Project> EditProjectAsync(int projectId, Project project);
-        Task<IEnumerable<Mission>?> GetTasksByProjectAsync(int projectId);
+        Task<ProjectDTO> EditProjectAsync(int projectId, ProjectDTO project);
+        Task<IEnumerable<MissionDTO>?> GetTasksByProjectAsync(int projectId);
     }
 }
