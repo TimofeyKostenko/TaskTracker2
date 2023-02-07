@@ -3,6 +3,7 @@ using Business.DTO;
 using Business.Interfaces;
 using DAL.Repositories;
 using Domain.Entities;
+using Business.Exceptions;
 
 namespace Business
 {
@@ -32,15 +33,19 @@ namespace Business
         public async Task<bool> DeleteMissionAsync(int missionId)
         {
             var mission = await missionRepo.GetAsync(missionId);
+            if (mission == null)
+            {
+                throw new EntityNotExistException("Mission", missionId);
+            }
             await missionRepo.DeleteAsync(mission);
             return true;
         }
         public async Task<MissionDTO> EditMissionAsync(int missionId, MissionDTO mission)
         {
             var changedMission = await missionRepo.GetAsync(missionId);
-            if  (changedMission == null)
+            if (changedMission == null)
             {
-
+                throw new EntityNotExistException("Mission", missionId);
             }
             changedMission.MissionName = mission.MissionName;
             changedMission.ProjectId = mission.ProjectId;
@@ -51,13 +56,19 @@ namespace Business
             await missionRepo.UpdateAsync(changedMission);
             return mapper.Map<MissionDTO>(mission);
         }
-        public async Task<IEnumerable<Mission>?> GetAllAsync()
+        public async Task<IEnumerable<MissionDTO>?> GetAllAsync()
         {
-            return await missionRepo.GetAllAsync();
+            var missions = await missionRepo.GetAllAsync();
+            return missions.Select(mission => mapper.Map<MissionDTO>(mission));
         }
-        public async Task<Mission?> GetMissionAsync(int missionId)
+        public async Task<MissionDTO?> GetMissionAsync(int missionId)
         {
-            return await missionRepo.GetAsync(missionId);
+            var mission = await missionRepo.GetAsync(missionId);
+            if (mission == null)
+            {
+                throw new EntityNotExistException("Mission", missionId);
+            }
+            return mapper.Map<MissionDTO>(mission);
 
         }
     }
