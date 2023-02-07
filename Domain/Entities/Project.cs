@@ -10,15 +10,12 @@ namespace Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Project name")]
         [Required(ErrorMessage = "Enter a project name")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Invalid length of the name (3 to 50 characters)")]
         public string? ProjectName { get; set; }
 
-        [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 
-        [Display(Name = "Completion Date")]
         public DateTime? CompletionDate { get; set; }
 
         public ProjectStatus? Status { get; set; }

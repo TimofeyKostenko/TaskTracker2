@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.DTO;
+using Business.Exceptions;
 using Business.Interfaces;
 using DAL.Repositories;
 using Domain.Entities;
+using System.Reflection;
 
 
 namespace Business
@@ -10,7 +12,6 @@ namespace Business
 
     public class ProjectService : IProjectService
     {
-        //adding reposiroties for Projects
         private readonly IProjectRepository projectRepo;
         private readonly IMapper mapper;
 
@@ -35,13 +36,20 @@ namespace Business
         public async Task<bool> DeleteProjectAsync(int projectId)
         {
             var project = await projectRepo.GetAsync(projectId);
-            
+            if (project == null)
+            {
+                throw new EntityNotExistException("Project", projectId);
+            }
             await projectRepo.DeleteAsync(project);
             return true;
         }
         public async Task<ProjectDTO> EditProjectAsync(int projectId, ProjectDTO project)
         {
             var changedProject = await projectRepo.GetAsync(projectId);
+            if (changedProject == null)
+            {
+                throw new EntityNotExistException("Project", projectId);
+            }
             changedProject.ProjectName = project.ProjectName;
             changedProject.StartDate = project.StartDate;
             changedProject.CompletionDate = project.CompletionDate;
@@ -60,6 +68,10 @@ namespace Business
         public async Task<ProjectDTO?> GetProjectAsync(int projectId)
         {
             var project = await projectRepo.GetAsync(projectId);
+            if (project == null)
+            {
+                throw new EntityNotExistException("Project", projectId);
+            }
             return mapper.Map<ProjectDTO>(project);
         }
 
