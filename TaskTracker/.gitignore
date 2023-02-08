@@ -1,0 +1,10 @@
+
+
+TaskTracker.csproj.user
+
+*.csproj
+*.csproj.user
+
+
+.vs
+/bin/
