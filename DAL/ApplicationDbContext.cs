@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DAL
 {
@@ -14,15 +15,11 @@ namespace DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            
             //Map entity to table
             modelBuilder.Entity<Mission>().ToTable("Missions", "dbo");
             modelBuilder.Entity<Project>().ToTable("Projects", "dbo");
 
             modelBuilder.Entity<Project>().HasMany(p => p.Missions).WithOne(m => m.Project).HasForeignKey(m => m.ProjectId);
-
         }
-
     }
 }

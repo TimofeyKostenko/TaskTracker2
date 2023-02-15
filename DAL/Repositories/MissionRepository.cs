@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
-    public class MissionRepository : IBaseRepository<Mission>
+    public class MissionRepository : IMissionRepository
     {
         private readonly ApplicationDbContext db;
 
@@ -10,42 +11,30 @@ namespace DAL.Repositories
         {
             this.db = db;
         }
-
-        public async Task<bool> Create(Mission entity)
+        public async Task CreateAsync(Mission mission)
         {
-            await db.Missions.AddAsync(entity);
+            await db.Missions.AddAsync(mission);
             await db.SaveChangesAsync();
-            return true;
-
         }
-
-        public async Task<bool> Delete(Mission entity)
+        public async Task DeleteAsync(Mission mission)
         {
-            db.Missions.Remove(entity);
+            db.Missions.Remove(mission);
             await db.SaveChangesAsync();
-            return true;
         }
-
-        public Mission? Get(int id)
+        public async Task<Mission?> GetAsync(int missionId)
         {
-            return db.Missions.FirstOrDefault(x => x.Id == id);
+            return await db.Missions.SingleOrDefaultAsync(x => x.Id == missionId);
         }
-
-        public IQueryable<Mission>? GetAll()
+        public async Task<IEnumerable<Mission>?> GetAllAsync()
         {
-            return db.Missions;
+
+            return await db.Missions.ToListAsync();
         }
-
-        public IQueryable<Mission> GetTasks(int id)
+        public async Task<Mission?> UpdateAsync(Mission mission)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Mission> Update(Mission entity)
-        {
-            db.Missions.Update(entity);
+            db.Missions.Update(mission);
             await db.SaveChangesAsync();
-            return entity;
+            return mission;
         }
     }
 }

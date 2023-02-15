@@ -1,4 +1,7 @@
-﻿using Business.Interfaces;
+﻿using AutoMapper;
+using Business.DTO;
+using Business.Exceptions;
+using Business.Interfaces;
 using DAL.Repositories;
 using Domain.Entities;
 
@@ -6,14 +9,15 @@ namespace Business
 {
     public class MissionService  : IMissionService
     {
-        private readonly IBaseRepository<Mission> missionRepo;
+        private readonly IMissionRepository missionRepo;
+        private readonly IMapper mapper;
 
-        public MissionService(IBaseRepository<Mission> missionRepo)
+        public MissionService(IMapper mapper, IMissionRepository missionRepo)
         {
             this.missionRepo = missionRepo;
+            this.mapper = mapper;
         }
-
-        public Mission CreateMission(Mission mission)
+        public async Task<MissionDTO> CreateMissionAsync(MissionDTO mission)
         {
             var newMission = new Mission()
             {
@@ -23,47 +27,47 @@ namespace Business
                 Status = mission.Status,
                 Priority = mission.Priority
             };
-            missionRepo.Create(newMission);
-            return newMission;
+            await missionRepo.CreateAsync(newMission);
+            return mapper.Map<MissionDTO>(mission); 
         }
-
-
-        public async Task<bool> DeleteMission(int id)
+        public async Task DeleteMissionAsync(int missionId)
         {
-            var mission = missionRepo.Get(id);
-            await missionRepo.Delete(mission);
-            return true;
-        }
-
-
-        public async Task<Mission> EditMission(int id, Mission mission)
-        {
-            var changedMission = missionRepo.Get(id);
-            if (changedMission == null)
+            var mission = await missionRepo.GetAsync(missionId);
+            if (mission == null)
             {
-                throw new ValidationException("This object does not exist", "");
-            };
-
+                throw new EntityNotExistException("Mission", missionId);
+            }
+            await missionRepo.DeleteAsync(mission);
+        }
+        public async Task<MissionDTO> EditMissionAsync(int missionId, MissionDTO mission)
+        {
+            var changedMission = await missionRepo.GetAsync(missionId);
+            if  (changedMission == null)
+            {
+                throw new EntityNotExistException("Mission", missionId);
+            }
             changedMission.MissionName = mission.MissionName;
             changedMission.ProjectId = mission.ProjectId;
             changedMission.Description = mission.Description;
             changedMission.Status = mission.Status;
             changedMission.Priority = mission.Priority;
 
-            await missionRepo.Update(changedMission);
-            return changedMission;
+            await missionRepo.UpdateAsync(changedMission);
+            return mapper.Map<MissionDTO>(mission);
         }
-
-
-        public IQueryable<Mission>? GetAll() => missionRepo.GetAll();
-
-
-        public Mission? GetMission(int id) => missionRepo.Get(id);
-
-
-        public IQueryable<Mission>? GetMissionsProject(int projectId)
+        public async Task<IEnumerable<MissionDTO>?> GetAllAsync()
         {
-            return missionRepo.GetAll().Where(x => x.ProjectId == projectId); ;
+            var missions = await missionRepo.GetAllAsync();
+            return missions.Select(mission => mapper.Map<MissionDTO>(mission));
+        }
+        public async Task<MissionDTO?> GetMissionAsync(int missionId)
+        {
+            var mission = await missionRepo.GetAsync(missionId);
+            if (mission == null)
+            {
+                throw new EntityNotExistException("Mission", missionId);
+            }
+            return mapper.Map<MissionDTO>(mission);
         }
     }
 }

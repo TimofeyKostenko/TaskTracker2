@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace Domain.Enum
 {
 
-     public enum ProjectStatus //  enumerator of project statuses for the entity Project property
+     public enum ProjectStatus
 
     {
         [Display(Name = "NotStarted")]
